@@ -22,22 +22,18 @@ public class FileDirIterator {
     dirList.add(directory);
   }
 
-  public Iterator createFilesIterator() {
-    return fileList.iterator();
-  }
-
-  public Iterator createDirsIterator() {
-    return dirList.iterator();
+  public Iterator createIterator(Collection collection) {
+    return collection.iterator();
   }
 
   public int computeSize(){
     int sizeInBytes=0;
-    Iterator filesIterator = createFilesIterator();
+    Iterator filesIterator = createIterator(fileList);
     while(filesIterator.hasNext()) {
       File file = (File) filesIterator.next();
       sizeInBytes += file.getSizeInBytes();
     }
-    Iterator dirsIterator = createDirsIterator();
+    Iterator dirsIterator = createIterator(dirList);
     while(dirsIterator.hasNext()) {
       Directory dir = (Directory) dirsIterator.next();
       sizeInBytes += dir.computeSize();
@@ -46,7 +42,6 @@ public class FileDirIterator {
   }
 
   public void print(){
-    System.out.println("- drive " + name);
     for (Directory dir : dirList){
       dir.print();
     }
