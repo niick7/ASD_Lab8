@@ -42,11 +42,15 @@ public class FileDirIterator {
   }
 
   public void print(){
-    for (Directory dir : dirList){
-      dir.print();
-    }
-    for (File file : fileList){
+    Iterator filesIterator = createIterator(fileList);
+    while(filesIterator.hasNext()) {
+      File file = (File) filesIterator.next();
       file.print();
+    }
+    Iterator dirsIterator = createIterator(dirList);
+    while(dirsIterator.hasNext()) {
+      Directory dir = (Directory) dirsIterator.next();
+      dir.print();
     }
   }
 }
